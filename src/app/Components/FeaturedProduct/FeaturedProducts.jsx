@@ -1,202 +1,156 @@
 'use client';
+
 import { useEffect, useState } from "react";
-import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
 import Image from "next/image";
 import Link from "next/link";
+
 const FeaturedProducts = () => {
-    // let [featuredProduct, setFeaturedProduct] = useState([]);
-    // useEffect(() => {
-    //     let fetchFeaturedProduct = async () => {
-    //         let res = await fetch('http://localhost:3000/api/product');
-    //         let data = await res.json();
-    //         const categories = [...new Set(data.map(item => item.category))];
-    //         const selectedProducts = [];
-    //         categories.forEach(cat => {
-    //             const items = data.filter(item => item.category === cat).slice(0, 6);
-    //             selectedProducts.push(...items);
-    //         })
-    //         setFeaturedProduct(selectedProducts);
-    //     };
-    //     fetchFeaturedProduct();
+  const [mostSoldProduct, setMostSoldProduct] = useState([]);
+  const [newArrivalProduct, setNewArrivalProduct] = useState([]);
 
-    // }, [])
-    // console.log(featuredProduct)
+  useEffect(() => {
+    const fetchFeaturedProduct = async () => {
+      const res = await fetch('http://localhost:3000/api/product');
+      const data = await res.json();
 
-    let [mostSoldProduct, setMostSoldProduct] = useState([]);
-    let [newArrivalProduct, setNewArrivalProduct] = useState([]);
-    useEffect(() => {
-        let fetchFeaturedProduct = async () => {
-            let res = await fetch('http://localhost:3000/api/product');
-            let data = await res.json();
-            const soldProducts = data.filter(product => product.sold !== undefined);
-            // Sort descending by sold 
-            const items = soldProducts.sort((a, b) => b.sold - a.sold);
-            setMostSoldProduct(items);
-            const newArrival = data.slice(-20).reverse();
-            setNewArrivalProduct(newArrival);
-        };
-        fetchFeaturedProduct();
+      const soldProducts = data
+        .filter(p => p.sold !== undefined)
+        .sort((a, b) => b.sold - a.sold);
 
-    }, [])
-    console.log(newArrivalProduct)
+      setMostSoldProduct(soldProducts);
+      setNewArrivalProduct(data.slice(-20).reverse());
+    };
+    fetchFeaturedProduct();
+  }, []);
 
+  return (
+    <section className="container mx-auto p-4 px-4 my-20">
+      <h2 className="text-3xl font-bold  mb-10">
+        Discover your next business opportunity
+      </h2>
 
-    return (
-        <div className="container p-16 mx-auto my-20">
-            <h2 className="text-3xl font-bold">Discover your next business opportunity</h2>
+      {/* GRID */}
+      <div className="grid grid-cols-1 p-4 lg:grid-cols-3 gap-8">
 
-            <div className="flex justify-between my-6">
-                <div className="w-[30%]">
-                    <h4 className="text-2xl mb-4 font-semibold">Top Ranking</h4>
-                    <div className="bg-white p-4   rounded-2xl">
+        {/* ================= TOP RANKING ================= */}
+        <div className="bg-white rounded-2xl shadow-sm p-6">
+          <h3 className="text-xl font-semibold mb-4">🔥 Top Ranking</h3>
 
-                        <Swiper
-                            style={{
-                                '--swiper-navigation-color': '#000000',
-                            }}
+          <Swiper
+            navigation
+            loop={mostSoldProduct.length > 1}
+            slidesPerView={1}
+            spaceBetween={20}
+            modules={[Navigation]}
+          >
+            {mostSoldProduct?.map(product => (
+              <SwiperSlide key={product._id}>
+                <div className="flex flex-col gap-4">
 
-                            navigation={true}
-                            loop={mostSoldProduct.length > 1}
-                            slidesPerView={1}
-                            spaceBetween={20}
-                            modules={[Navigation]}
-                            className="mySwiper"
-                        >
-                            {
-                                mostSoldProduct?.map((product) => {
-                                    return (
+                  <div className="flex justify-between text-sm text-gray-600">
+                    <span>Hot Selling</span>
+                    <span className="font-semibold">${product.price}</span>
+                  </div>
 
-                                        <SwiperSlide key={product._id} className="space-y-4 p-4 bg-white rounded-2xl flex flex-col items-center">
-                                            <div className="flex justify-between items-center">
-                                                <h2 className="text-xl">Hot Selling</h2>
-                                                <p> price : ${product.price}</p>
-                                            </div>
-                                            <h2 className="text-[#837974] text-center">{product?.title}</h2>
+                  <p className="text-center text-gray-700 font-medium line-clamp-2">
+                    {product.title}
+                  </p>
 
-                                            <Image
-                                                src={product?.images[0]}
-                                                width={300}
-                                                height={300}
-                                                alt="slide"
-                                                className="mx-auto h-60 object-contain"
-                                            />
+                  <Image
+                    src={product.images[0]}
+                    width={300}
+                    height={300}
+                    alt={product.title}
+                    className="mx-auto h-56 object-contain"
+                  />
 
-                                            {/* Button stays below the image */}
-                                            <button className="btn bg-black w-full text-white py-2 rounded-lg mt-4">
-                                                Add To Cart
-                                            </button>
-                                        </SwiperSlide>
-
-                                    )
-                                })
-                            }
-                        </Swiper>
-                    </div>
+                  <button className="
+                    w-full
+                    bg-black
+                    text-white
+                    py-2
+                    rounded-lg
+                    hover:bg-[#ff9400]
+                    hover:text-black
+                    transition
+                  ">
+                    Add to Cart
+                  </button>
                 </div>
-
-
-                <div className="w-[30%]    ">
-                    <div className="flex items-center justify-between">
-                        <h4 className="text-2xl font-semibold">New arrivals</h4>
-                        <Link href={''} className="underline">View More</Link>
-                    </div>
-                    <div className="space-y-6 mt-3 rounded-2xl  bg-white p-10">
-                        <h2>{newArrivalProduct.length}+ Products Added Recently</h2>
-
-                        <div className="grid gap-5 grid-cols-2">
-                            {
-                                newArrivalProduct?.slice(0, 6).map((product) => {
-                                    return (
-
-                                        <div className="bg-[#f4f4f4] rounded-xl p-4 h-[120px]" key={product._id}>
-                                            <Image
-                                                src={product?.images[0]}
-                                                width={200}
-                                                height={200}
-                                                className=""
-                                                alt="slide"
-                                            />
-                                        </div>
-
-                                    )
-                                })
-                            }
-                        </div>
-
-                    </div>
-                </div>
-
-
-
-
-
-
-
-                <div className="w-[30%] ">
-                    <div className="flex items-center justify-between">
-                        <h4 className="text-2xl font-semibold">Featured selections</h4>
-                        <Link href={''} className="underline">View More</Link>
-                    </div>
-                    <div className="space-y-6 mt-3 rounded-2xl bg-white p-10">
-                        <h2>Deal on Best Sellers</h2>
-
-                        <div className="space-y-10">
-                            <Image src={'/banner/images (41).jpg'} width={400} height={400} alt="best sell"></Image>
-                            <Image src={'/banner/images (55).jpg'} width={400} height={400} alt="best sell"></Image>
-                        </div>
-
-                    </div>
-                </div>
-
-
-
-                {/* 
-                <div className="w-[30%]">
-                    <h4>Top Ranking</h4>
-                    <div>
-                        <h2>Hot Selling</h2>
-                        <Swiper
-                            style={{
-                                '--swiper-navigation-color': '#fff',
-                                '--swiper-pagination-color': '#fff',
-                            }}
-
-                            navigation={true}
-                            modules={[Navigation]}
-                            className="mySwiper"
-                        >
-                            {
-                                mostSoldProduct?.map((product) => {
-                                    return ( 
-
-                                            <SwiperSlide>
-                                                <Image
-                                                    src={product?.images[0]}
-                                                    width={200}
-                                                    height={200}
-                                                    alt="slide"
-                                                />
-                                                <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-                                            </SwiperSlide> 
-                                    )
-                                })
-                            }
-                        </Swiper>
-                    </div>
-                </div>  */}
-
-
-
-
-            </div>
-
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
-    );
+
+        {/* ================= NEW ARRIVALS ================= */}
+        <div className="bg-white rounded-2xl shadow-sm p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-semibold">✨ New Arrivals</h3>
+            <Link href="#" className="text-sm underline">
+              View More
+            </Link>
+          </div>
+
+          <p className="text-sm text-gray-600 mb-4">
+            {newArrivalProduct.length}+ products added recently
+          </p>
+
+          <div className="grid grid-cols-2 gap-4">
+            {newArrivalProduct?.slice(0, 6).map(product => (
+              <div
+                key={product._id}
+                className="bg-gray-100 rounded-xl p-3 flex items-center justify-center hover:shadow-md transition"
+              >
+                <Image
+                  src={product.images[0]}
+                  width={150}
+                  height={150}
+                  alt={product.title}
+                  className="h-24 object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ================= FEATURED SELECTION ================= */}
+        <div className="bg-white rounded-2xl shadow-sm p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-semibold">🎯 Featured Selections</h3>
+            <Link href="#" className="text-sm underline">
+              View More
+            </Link>
+          </div>
+
+          <p className="text-sm text-gray-600 mb-6">
+            Deals on best sellers
+          </p>
+
+          <div className="space-y-6">
+            <Image
+              src="/banner/images (41).jpg"
+              width={400}
+              height={400}
+              alt="Best Seller"
+              className="rounded-xl"
+            />
+            <Image
+              src="/banner/images (55).jpg"
+              width={400}
+              height={400}
+              alt="Best Seller"
+              className="rounded-xl"
+            />
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
 };
 
 export default FeaturedProducts;

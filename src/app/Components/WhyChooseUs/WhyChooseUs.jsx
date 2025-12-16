@@ -1,71 +1,93 @@
+'use client';
+
 import { TbTruckDelivery } from "react-icons/tb";
 import { MdOutlineWifiCalling3 } from "react-icons/md";
 import { FiRefreshCcw } from "react-icons/fi";
+import { RiSecurePaymentLine } from "react-icons/ri";
 
 const WhyChooseUs = () => {
-    return (
-        <div className="container mx-auto">
-            <div className="bg-[#fef3e1] p-2">
-                <ul className="flex text-2xl px-5  font-bold justify-evenly">
-                    <li>Free Delivery</li>
-                    |
-                    <li>Satisfaction Promised </li>
-                    |
-                    <li>Excellent Support</li>
-                    |
-                    <li>Secure Payment</li> 
-                </ul>
-            </div>
-            <div className="flex p-8 bg-[#f4f5f8]  gap-20 justify-evenly" > 
+  const features = [
+    {
+      icon: <TbTruckDelivery size={36} />,
+      title: "Free Delivery",
+      desc: "Free Bangladesh delivery within 6–10 business days.",
+    },
+    {
+      icon: <MdOutlineWifiCalling3 size={36} />,
+      title: "24/7 Support",
+      desc: "Email us anytime at support@topcart.com",
+    },
+    {
+      icon: <FiRefreshCcw size={36} />,
+      title: "Easy Returns",
+      desc: "14-day worry-free return policy. T&Cs apply.",
+    },
+    {
+      icon: <RiSecurePaymentLine size={36} />,
+      title: "Secure Payment",
+      desc: "All payment processes are fully encrypted.",
+    },
+  ];
 
-                <div className="space-y-4">
-                    <div className="flex justify-center">
-                        <TbTruckDelivery className=" " size={50} />  
-                    </div>
-                    <div  className="space-y-2" >
-                            <h2 className="text-xl font-semibold text-center">Free UK Delivery</h2>
-                            <p className="text- text-center">We provide free BD Delivery within 6-10 business day.</p>
-                    </div>
-                </div>
-                <div  className="space-y-4">
+  return (
+    <section className="bg-[#f4f5f8] py-12">
+      <div className="container mx-auto px-4">
 
-
-                    <div className="flex justify-center">
-                        <MdOutlineWifiCalling3  size={50} />  
-                    </div>
-                    <div className="space-y-2" >
-                            <h2 className="text-xl font-semibold text-center">Contact Us</h2>
-                            <p className="text-">support@ourfriday.co.uk</p>
-                    </div>
-                </div>
-
-
-                <div  className="space-y-4">
-                    <div className="flex justify-center">
-                        <FiRefreshCcw  size={50} />  
-                    </div>
-                    <div  className="space-y-2" >
-                            <h2 className="text-xl font-semibold text-center">Worry Free Return Policy</h2>
-                            <p className="text- text-center" >We provide 14 days worry-free return policy. T&Cs apply.</p>
-                    </div>
-                </div>
-
-
-                <div  className="space-y-4">
-                    <div className="flex justify-center">
-                        <TbTruckDelivery size={50} />  
-                    </div>
-                    <div className="space-y-2" >
-                            <h2 className="text-xl font-semibold text-center">Secure checkout</h2>
-                            <p className="text- text-center">All the payment processes are secure.</p>
-                    </div>
-                </div>
-
-
-
-            </div>
+        {/* Highlight Bar */}
+        <div className="bg-[#fef3e1] rounded-lg py-3 mb-10">
+          <ul className="flex flex-wrap justify-center gap-6 text-sm font-semibold text-gray-800">
+            <li>🚚 Free Delivery</li>
+            <li>💯 Satisfaction Promised</li>
+            <li>📞 Excellent Support</li>
+            <li>🔒 Secure Payment</li>
+          </ul>
         </div>
-    );
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((item, index) => (
+            <div
+              key={index}
+              className="
+                bg-white
+                rounded-xl
+                p-6
+                text-center
+                shadow-sm
+                hover:shadow-lg
+                transition
+                duration-300
+                group
+              "
+            >
+              <div className="
+                mx-auto
+                w-16 h-16
+                flex items-center justify-center
+                rounded-full
+                bg-[#ff9400]/10
+                text-[#ff9400]
+                group-hover:bg-[#ff9400]
+                group-hover:text-black
+                transition
+              ">
+                {item.icon}
+              </div>
+
+              <h3 className="mt-4 text-lg font-semibold text-gray-800">
+                {item.title}
+              </h3>
+
+              <p className="mt-2 text-sm text-gray-600">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
 };
 
 export default WhyChooseUs;

@@ -171,56 +171,79 @@ const testimonials = [
 
 export default function TestimonialSlider() {
     return (
-        <section className="container mx-auto py-16 px-4">
-            <div className="text-center space-y-4 w-5xl mx-auto">
-                <h1 className="text-5xl font-semibold text-[#51200b]">Get tailored discounts, services, and tools for your business stage.</h1>
-                <p className="text-[#898986] text-lg">Grow with curated benefits offered by the free Alibaba.com Membership, whether you are a small business needing the essentials to start sourcing or a well-established enterprise looking for tools and solutions for more complex orders.</p>
-                <button className="underline text-xl font-bold">Learn More</button>
-            </div>
-            <div className="mt-16 bg-white p-8 rounded-xl">
-                <h2 className="text-3xl font-bold text-center mb-10">
-                    What Our Customers Say
-                </h2>
+     <section className="container mx-auto py-16 px-4">
+      
+      {/* Heading */}
+      <div className="text-center space-y-4 max-w-4xl mx-auto">
+        <h1 className="text-4xl sm:text-5xl font-bold text-[#51200b] leading-snug">
+          Get tailored discounts, services, and tools for your business stage.
+        </h1>
+        <p className="text-gray-500 text-lg sm:text-xl">
+          Grow with curated benefits offered by the free Alibaba.com Membership, whether you are a small business needing the essentials to start sourcing or a well-established enterprise looking for tools and solutions for more complex orders.
+        </p>
+        <button className="underline text-lg sm:text-xl font-semibold hover:text-[#ff9400] transition">
+          Learn More
+        </button>
+      </div>
 
-                <Swiper
-                    modules={[Autoplay, Pagination]}
-                    autoplay={{ delay: 2500, disableOnInteraction: false }}
-                    pagination={{ clickable: true }}
-                    spaceBetween={30}
-                    breakpoints={{
-                        640: { slidesPerView: 1 },
-                        768: { slidesPerView: 2 },
-                        1024: { slidesPerView: 3 }
-                    }}
-                >
-                    {testimonials.map((item) => (
-                        <SwiperSlide key={item.id}>
-                            <div className="bg-white rounded-2xl  p-6 h-full flex flex-col">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <img
-                                        src={item.avatar}
-                                        alt={item.name}
-                                        className="w-14 h-14 rounded-full object-cover"
-                                    />
-                                    <div>
-                                        <h4 className="font-semibold text-lg">{item.name}</h4>
-                                        <p className="text-sm text-gray-500">{item.role}</p>
-                                    </div>
-                                </div>
+      {/* Slider */}
+      <div className="mt-16 p-6 bg-white rounded-2xl shadow-lg">
+        <h2 className="text-3xl font-bold text-center mb-12">
+          What Our Customers Say
+        </h2>
 
-                                <p className="text-gray-600 flex-grow">“{item.comment}”</p>
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          pagination={{ clickable: true }}
+          spaceBetween={30}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+        >
+          {testimonials.map((item) => (
+            <SwiperSlide key={item.id}>
+              <div className="bg-[#fffaf5] rounded-2xl p-6 h-full flex flex-col justify-between shadow-md hover:shadow-xl transition-transform duration-300 hover:scale-105">
+                
+                {/* User Info */}
+                <div className="flex items-center gap-4 mb-4">
+                  <img
+                    src={item.avatar}
+                    alt={item.name}
+                    className="w-14 h-14 rounded-full object-cover border-2 border-[#ff9400]"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-lg text-[#49271c]">{item.name}</h4>
+                    <p className="text-sm text-gray-500">{item.role}</p>
+                  </div>
+                </div>
 
-                                <div className="mt-4 text-yellow-500">
-                                    {"★".repeat(item.rating)}
-                                    <span className="text-gray-300">
-                                        {"★".repeat(5 - item.rating)}
-                                    </span>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-            </div>
-        </section>
+                {/* Comment */}
+                <p className="text-gray-700 flex-grow text-sm sm:text-base mb-4 leading-relaxed">
+                  “{item.comment}”
+                </p>
+
+                {/* Rating */}
+                <div className="flex items-center mt-2">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <span
+                      key={i}
+                      className={`text-xl ${
+                        i < item.rating ? "text-yellow-500" : "text-gray-300"
+                      }`}
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </section>
     );
 }
