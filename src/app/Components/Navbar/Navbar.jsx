@@ -1,62 +1,100 @@
+'use client';
+
 import Image from "next/image";
+import Link from "next/link";
 import { IoIosSearch } from "react-icons/io";
 import { FaHeart } from "react-icons/fa";
-import { GiShoppingBag } from "react-icons/gi"; 
-import Link from "next/link";
+import { GiShoppingBag } from "react-icons/gi";
 
 const Navbar = () => {
-    return (
-        <div className="bg-[#000000]  p-3">
-            <div className="navbar container mx-auto gap-5 ">
-                <div className="">
-                   <Link href={'/'}> <Image src={'/topcart-logo.png'} width={80} height={30} alt="nav logo"></Image></Link>
-                </div>
-                <div className="flex  flex-1  gap-2">
-                    <div className="flex-1 flex gap-5  items-center ">
-                        <label className="input w-full hidden lg:flex ">
-                            <input type="text" placeholder="Search TopCart" className="input  input-bordered" />
-                            <div className="bg-amber-500  p-1 cursor-pointer"><IoIosSearch size={22} /></div>
+  return (
+    <header className="sticky top-0 z-50 bg-black shadow-md">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16 gap-4">
 
-                        </label>
-                        <div>
-                            <div className="  flex justify-center">
-                                <FaHeart className=" " style={{ color: 'white', fontSize: '24px' }} />
-                            </div>
-                            <p className="text-white font-bold">WISHLIST</p>
-                        </div>
-                        <div className="" >
-                            <div className="relative flex justify-center">
-                                <GiShoppingBag  className="" color="white" size={22} />
-                                <span className="absolute bottom-1 left-6 font-bold bg-[#ff9400] text-white rounded-full px-2">0</span>
-                            </div>
-                            <p className="text-white font-bold ">CART</p>
-                        </div>
-                        <div className="dropdown  dropdown-end">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img
-                                        alt="Tailwind CSS Navbar component"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                                </div>
-                            </div>
-                            <ul
-                                tabIndex="-1"
-                                className="menu menu-sm dropdown-content bg-base-100 z-10 rounded-box   mt-3 w-52 p-2 shadow">
-                                <li>
-                                    <a className="justify-between">
-                                        Profile
-                                        <span className="badge">New</span>
-                                    </a>
-                                </li>
-                                <li><a>Settings</a></li>
-                                <li><a>Logout</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/topcart-logo.png"
+              width={90}
+              height={35}
+              alt="TopCart Logo"
+              priority
+            />
+          </Link>
+
+          {/* Search (Desktop only) */}
+          <div className="hidden lg:flex flex-1 max-w-xl">
+            <div className="flex w-full rounded-md overflow-hidden bg-white">
+              <input
+                type="text"
+                placeholder="Search products on TopCart"
+                className="flex-1 px-4 py-2 text-sm outline-none"
+              />
+              <button className="bg-[#ff9400] px-4 flex items-center justify-center">
+                <IoIosSearch size={22} className="text-black" />
+              </button>
             </div>
+          </div>
+
+          {/* Right Icons */}
+          <div className="flex items-center gap-6">
+
+            {/* Wishlist */}
+            <div className="hidden sm:flex flex-col items-center cursor-pointer group">
+              <FaHeart className="text-white text-xl group-hover:text-[#ff9400]" />
+              <span className="text-xs font-semibold text-white">WISHLIST</span>
+            </div>
+
+            {/* Cart */}
+            <div className="flex flex-col items-center cursor-pointer group relative">
+              <GiShoppingBag className="text-white text-2xl group-hover:text-[#ff9400]" />
+              <span className="absolute -top-1 -right-2 bg-[#ff9400] text-white text-xs font-bold rounded-full px-2">
+                0
+              </span>
+              <span className="text-xs font-semibold text-white">CART</span>
+            </div>
+
+            {/* User Dropdown */}
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-9 rounded-full ring ring-[#ff9400] ring-offset-2 ring-offset-black">
+                  <img
+                    alt="User Avatar"
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+              >
+                <li><a>Profile</a></li>
+                <li><a>Settings</a></li>
+                <li><a className="text-red-500">Logout</a></li>
+              </ul>
+            </div>
+
+          </div>
         </div>
-    );
+
+        {/* Mobile Search */}
+        <div className="lg:hidden mt-3 pb-3">
+          <div className="flex rounded-md overflow-hidden bg-white">
+            <input
+              type="text"
+              placeholder="Search TopCart"
+              className="flex-1 px-4 py-2 text-sm outline-none"
+            />
+            <button className="bg-[#ff9400] px-4 flex items-center justify-center">
+              <IoIosSearch size={22} className="text-black" />
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </header>
+  );
 };
 
 export default Navbar;
