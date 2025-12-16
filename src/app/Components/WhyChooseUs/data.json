@@ -1,0 +1,146 @@
+
+        //   /* ---------------- SMART WATCHES (16) ---------------- */
+        //   {
+        //     "title": "Samsung Galaxy Watch Ultra Rugged Smart Fitness Companion with Advanced ECG Sensors and Sleep Tracking for Athletes",
+        //     "price": 350,
+        //     "brand": "Samsung",
+        //     "stock": 80,
+        //     "discount": "10%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s1a.jpg","https://example.com/s1b.jpg","https://example.com/s1c.jpg"]
+        //   },
+        //   {
+        //     "title": "Apple Watch Series 9 Premium Health Monitoring Wrist Wear with Blood Oxygen, Fall Detection and Ultimate Apple Integration",
+        //     "price": 520,
+        //     "brand": "Apple",
+        //     "stock": 70,
+        //     "discount": "5%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s2a.jpg","https://example.com/s2b.jpg","https://example.com/s2c.jpg"]
+        //   },
+        //   {
+        //     "title": "Google Pixel Watch 2 Round Display Hybrid AI Powered Smart Watch with Body Response Tracking and Deep Google Fit Features",
+        //     "price": 420,
+        //     "brand": "Google Pixel",
+        //     "stock": 60,
+        //     "discount": "8%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s3a.jpg","https://example.com/s3b.jpg","https://example.com/s3c.jpg"]
+        //   },
+        //   {
+        //     "title": "OnePlus Watch X Seamless Smart Mobile Connectivity with Advanced Sport Modes and Ultra Fast Charging Support",
+        //     "price": 310,
+        //     "brand": "OnePlus",
+        //     "stock": 90,
+        //     "discount": "12%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s4a.jpg","https://example.com/s4b.jpg","https://example.com/s4c.jpg"]
+        //   },
+        //   {
+        //     "title": "Samsung Galaxy Watch Fit Lightweight Fitness Tracker Watch with Heart Rate Monitoring and Long Battery Backup",
+        //     "price": 220,
+        //     "brand": "Samsung",
+        //     "stock": 110,
+        //     "discount": "11%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s5a.jpg","https://example.com/s5b.jpg","https://example.com/s5c.jpg"]
+        //   },
+        //   {
+        //     "title": "Apple Watch SE Affordable Apple Performance Smartwatch with Retina Display and Daily Health Tracking Functions",
+        //     "price": 300,
+        //     "brand": "Apple",
+        //     "stock": 95,
+        //     "discount": "6%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s6a.jpg","https://example.com/s6b.jpg","https://example.com/s6c.jpg"]
+        //   },
+        //   {
+        //     "title": "Google Pixel Watch Lite Simple Elegant Smartwatch Designed for Everyday Activity and Productivity Features",
+        //     "price": 260,
+        //     "brand": "Google Pixel",
+        //     "stock": 85,
+        //     "discount": "9%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s7a.jpg","https://example.com/s7b.jpg","https://example.com/s7c.jpg"]
+        //   },
+        //   {
+        //     "title": "OnePlus Watch Lite Budget Friendly Smartwatch with Clear Touchscreen and Daily Health Monitoring",
+        //     "price": 200,
+        //     "brand": "OnePlus",
+        //     "stock": 120,
+        //     "discount": "10%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s8a.jpg","https://example.com/s8b.jpg","https://example.com/s8c.jpg"]
+        //   },
+        //   {
+        //     "title": "Samsung Galaxy Watch Active Sports Edition with Improved Strap Comfort and Calories Tracking System",
+        //     "price": 270,
+        //     "brand": "Samsung",
+        //     "stock": 100,
+        //     "discount": "8%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s9a.jpg","https://example.com/s9b.jpg","https://example.com/s9c.jpg"]
+        //   },
+        //   {
+        //     "title": "Apple Watch Ultra Adventure Outdoor Smartwatch with Titanium Build and Super Rugged Battery Life for Exploration",
+        //     "price": 900,
+        //     "brand": "Apple",
+        //     "stock": 35,
+        //     "discount": "4%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s10a.jpg","https://example.com/s10b.jpg","https://example.com/s10c.jpg"]
+        //   },
+        //   {
+        //     "title": "Google Pixel Watch Sports Style with Intelligent Notifications and Smart Assistant Connectivity",
+        //     "price": 380,
+        //     "brand": "Google Pixel",
+        //     "stock": 75,
+        //     "discount": "7%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s11a.jpg","https://example.com/s11b.jpg","https://example.com/s11c.jpg"]
+        //   },
+        //   {
+        //     "title": "OnePlus Watch Pro Stainless Steel Smartwatch with Clean UI and Multi-Day Battery Backup",
+        //     "price": 350,
+        //     "brand": "OnePlus",
+        //     "stock": 60,
+        //     "discount": "11%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s12a.jpg","https://example.com/s12b.jpg","https://example.com/s12c.jpg"]
+        //   },
+        //   {
+        //     "title": "Samsung Galaxy Watch S Premium Round Dial Smartwatch with Auto Workout Detection and Voice Control Features",
+        //     "price": 400,
+        //     "brand": "Samsung",
+        //     "stock": 55,
+        //     "discount": "9%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s13a.jpg","https://example.com/s13b.jpg","https://example.com/s13c.jpg"]
+        //   },
+        //   {
+        //     "title": "Apple Watch Series 8 Ultra Slim Modern Design with Car Crash Detection and Women’s Health Safety Monitoring",
+        //     "price": 480,
+        //     "brand": "Apple",
+        //     "stock": 65,
+        //     "discount": "5%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s14a.jpg","https://example.com/s14b.jpg","https://example.com/s14c.jpg"]
+        //   },
+        //   {
+        //     "title": "Google Pixel Watch Pro AMOLED Smart Display with Extended GPS and Strong Build Quality for Daily Runners",
+        //     "price": 430,
+        //     "brand": "Google Pixel",
+        //     "stock": 50,
+        //     "discount": "10%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s15a.jpg","https://example.com/s15b.jpg","https://example.com/s15c.jpg"]
+        //   },
+        //   {
+        //     "title": "OnePlus Watch Runner Edition Designed for Fitness Lovers with Water Resistance and Accurate Step Counting",
+        //     "price": 330,
+        //     "brand": "OnePlus",
+        //     "stock": 80,
+        //     "discount": "12%",
+        //     "category": "smart watch",
+        //     "images": ["https://example.com/s16a.jpg","https://example.com/s16b.jpg","https://example.com/s16c.jpg"]
+        //   },
