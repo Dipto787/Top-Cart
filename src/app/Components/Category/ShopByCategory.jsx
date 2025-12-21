@@ -23,7 +23,7 @@ const ShopByCategory = ({ categories }) => {
           {categories?.map((category) => (
             <Link
               key={category.id}
-              href={`/category/${category.category}`}
+              href={`/category/${category?.category}`}
               className="
                 min-w-[120px]
                 text-center

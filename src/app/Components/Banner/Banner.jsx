@@ -6,7 +6,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import Image from 'next/image';
 const Banner = () => {
     return (
-        <div className='container mx-auto  '>
+        <div className='container mx-auto   '>
             <Swiper navigation={true} autoplay={{
           delay: 1000,
           disableOnInteraction: false,

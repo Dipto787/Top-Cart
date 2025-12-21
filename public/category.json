@@ -7,16 +7,17 @@
         "id": 2,
         "category": "headphone"
     },
-    {
-        "id": 3,
-        "category": "camera"
-    },
+   
     {
         "id": 4,
-        "category": "smart watch"
+        "category": "smartwatch"
     },
     {
         "id": 5,
         "category": "laptop"
+    },
+    {
+        "id": 3,
+        "category": "camera"
     }
 ]

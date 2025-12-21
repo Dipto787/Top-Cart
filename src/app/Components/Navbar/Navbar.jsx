@@ -5,10 +5,22 @@ import Link from "next/link";
 import { IoIosSearch } from "react-icons/io";
 import { FaHeart } from "react-icons/fa";
 import { GiShoppingBag } from "react-icons/gi";
+import ShopByCategory from "../Category/ShopByCategory";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  let [categories, setCategories] = useState(null);
+  useEffect(() => {
+    const fetchCategories = async () => {
+      let res = await fetch('/category.json');
+      let data = await res.json();
+      console.log('fdfadsfdasfdsffdfd', data)
+      setCategories(data);
+    };
+    fetchCategories();
+  }, [])
   return (
-    <header className="sticky top-0 z-50 bg-black shadow-md">
+    <header className=" bg-black shadow-md">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 gap-4">
 
@@ -93,6 +105,7 @@ const Navbar = () => {
         </div>
 
       </div>
+       <ShopByCategory categories={categories}></ShopByCategory>
     </header>
   );
 };
