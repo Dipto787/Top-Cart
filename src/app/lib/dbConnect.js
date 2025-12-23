@@ -1,6 +1,5 @@
 
-import { MongoClient, ServerApiVersion } from 'mongodb'
-import React from 'react'
+import { MongoClient, ServerApiVersion } from 'mongodb' 
 const uri = process.env.MONGODB_URI;
 export const collectionNameObj = {
     productCollection: 'products',

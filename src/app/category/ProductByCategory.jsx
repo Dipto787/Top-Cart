@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProductByCategory = ({ category }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState(null);
-  const [inStockOnly, setInStockOnly] = useState(false);
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [defaultPriceRange, setDefaultPriceRange] = useState([0, 1000]);
   const [showFilter, setShowFilter] = useState(false);
@@ -41,15 +41,13 @@ const ProductByCategory = ({ category }) => {
     let temp = [...products];
 
     if (selectedBrand) temp = temp.filter(p => p.brand === selectedBrand);
-    if (inStockOnly) temp = temp.filter(p => p.stock > 0);
     temp = temp.filter(p => p.price >= priceRange[0] && p.price <= priceRange[1]);
 
     setFilteredProducts(temp);
-  }, [selectedBrand, inStockOnly, priceRange, products]);
+  }, [selectedBrand, priceRange, products]);
 
   const clearFilters = () => {
-    setSelectedBrand(null);
-    setInStockOnly(false);
+    setSelectedBrand(null); 
     setPriceRange(defaultPriceRange);
   };
 
@@ -87,7 +85,7 @@ const ProductByCategory = ({ category }) => {
               onClick={clearFilters}
               className="text-sm text-red-500 hover:underline"
             >
-              Clear
+              Clear Filter
             </button>
 
             {/* Mobile Close Button */}
@@ -131,7 +129,7 @@ const ProductByCategory = ({ category }) => {
             <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
-                checked={true} 
+                defaultChecked 
               />
               In Stock Only
             </label>
@@ -172,7 +170,7 @@ const ProductByCategory = ({ category }) => {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
               {filteredProducts.map(product => (
-                <div
+                <Link href={`/product/${product._id}`}
                   key={product._id}
                   className="bg-white rounded-2xl p-4 shadow hover:shadow-xl transition"
                 >
@@ -195,7 +193,7 @@ const ProductByCategory = ({ category }) => {
                     {product.stock ? "In Stock" : "Out of Stock"}
                   </p>
  
-                </div>
+                </Link>
               ))}
             </div>
           )}
