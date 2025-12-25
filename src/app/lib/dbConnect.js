@@ -1,8 +1,9 @@
 
-import { MongoClient, ServerApiVersion } from 'mongodb' 
+import { MongoClient, ServerApiVersion } from 'mongodb'
 const uri = process.env.MONGODB_URI;
 export const collectionNameObj = {
     productCollection: 'products',
+    cartsCollection: 'carts',
 
 }
 export default function dbConnect(collectionName) {
