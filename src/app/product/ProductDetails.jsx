@@ -7,6 +7,7 @@ import { FaHeart } from "react-icons/fa";
 
 const ProductDetailsClient = ({ product }) => {
   let [cart, setCart] = useState(1);
+  console.log(product)
   // Map your images array to the format react-image-gallery expects
   const images = product.images.map(img => ({
     original: img,
@@ -45,7 +46,7 @@ const ProductDetailsClient = ({ product }) => {
         <h1 className="text-2xl font-bold">{product.title}</h1>
         <div>
           <del className=" text-gray-500">£{product.price}</del>
-          <p className="text-xl text-green-700">£{product.price - product.discount}</p>
+          <p className="text-xl text-green-700">£{product.price - parseInt(200)}</p>
         </div>
         <p><span className="font-semibold">Brand:</span> {product.brand}</p>
         <p><span className="font-semibold">Stock:</span> {product.stock > 0 ? "In Stock" : "Out of Stock"}</p>

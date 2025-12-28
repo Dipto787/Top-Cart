@@ -8,8 +8,11 @@ import { GiShoppingBag } from "react-icons/gi";
 import ShopByCategory from "../Category/ShopByCategory";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
+  let { data: session, status } = useSession();
+  console.log(session)
   const pathname = usePathname();
   const disableNav = pathname === "/login" || pathname === "/register";
   let [categories, setCategories] = useState(null);
@@ -24,7 +27,7 @@ const Navbar = () => {
   }, [])
   return (
     <div>
-    { !disableNav && <header className=" bg-black shadow-md">
+      {!disableNav && <header className=" bg-black shadow-md">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 gap-4">
 
@@ -119,6 +122,7 @@ const Navbar = () => {
               </button>
             </div>
           </div>
+          
 
         </div>
         <ShopByCategory categories={categories}></ShopByCategory>
@@ -128,3 +132,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+ 

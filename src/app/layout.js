@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import ShopByCategory from "./Components/Category/ShopByCategory";
+import NextAuthProvider from "@/Providers/NextAuthProvider";
 
 const geist = Geist({
   subsets: ["Playwrite NO"],
@@ -18,16 +19,18 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  
+
   return (
-    <html lang="en" data-theme="light"  >
+    <html lang="en" data-theme="light">
       <body
         className={`  antialiased`}>
-        <Navbar></Navbar>
-       
-        {children}
-        <Footer></Footer>
+        <NextAuthProvider>
+          <Navbar></Navbar>
 
+          {children}
+          <Footer></Footer>
+
+        </NextAuthProvider>
       </body>
     </html>
   );

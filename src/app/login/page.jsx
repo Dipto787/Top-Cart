@@ -1,12 +1,38 @@
 "use client";
 
+import { signIn } from "next-auth/react"; 
+import { useRouter } from "next/navigation";
+
 export default function LoginPage() {
+  let router = useRouter();
+  let handleSubmit = async (e) => {
+    e.preventDefault();
+    let email = e.target.email.value;
+    let password = e.target.password.value;
+    console.log({ email, password }); 
+    try {
+      const response = await signIn('credentials',
+        {
+          email,
+          password,
+          callbackUrl: '/',
+          redirect: false
+        });
+      if (response.ok) { 
+        router.push('/');
+      } else { 
+      }
+    } catch (err) {
+      console.log(err) 
+
+    }
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-black px-4">
-      
+
       {/* Card */}
       <div className="w-full max-w-md bg-neutral-900 border border-white/10 rounded-xl shadow-lg p-8">
-        
+
         {/* Header */}
         <div className="mb-6 text-center">
           <h1 className="text-2xl font-semibold text-white">
@@ -18,8 +44,8 @@ export default function LoginPage() {
         </div>
 
         {/* Form */}
-        <form className="space-y-5">
-          
+        <form onSubmit={handleSubmit} className="space-y-5">
+
           {/* Email */}
           <div>
             <label className="block text-sm text-gray-300 mb-1">
@@ -27,6 +53,7 @@ export default function LoginPage() {
             </label>
             <input
               type="email"
+              name="email"
               placeholder="you@example.com"
               className="
                 w-full px-4 py-2 rounded-md
@@ -44,6 +71,7 @@ export default function LoginPage() {
             </label>
             <input
               type="password"
+              name="password"
               placeholder="••••••••"
               className="
                 w-full px-4 py-2 rounded-md
