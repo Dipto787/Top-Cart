@@ -1,15 +1,19 @@
 "use client";
 
-import { signIn } from "next-auth/react"; 
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   let router = useRouter();
+  let searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
   let handleSubmit = async (e) => {
     e.preventDefault();
     let email = e.target.email.value;
     let password = e.target.password.value;
-    console.log({ email, password }); 
+    console.log({ email, password });
     try {
       const response = await signIn('credentials',
         {
@@ -18,12 +22,13 @@ export default function LoginPage() {
           callbackUrl: '/',
           redirect: false
         });
-      if (response.ok) { 
-        router.push('/');
-      } else { 
+      if (response.ok) {
+        toast.success('success to sign in')
+        router.push(redirect);
+      } else {
       }
     } catch (err) {
-      console.log(err) 
+      toast.error(err.message)
 
     }
   }
@@ -112,9 +117,9 @@ export default function LoginPage() {
         {/* Footer */}
         <p className="mt-6 text-center text-sm text-gray-400">
           Don’t have an account?{" "}
-          <a href="/register" className="text-white hover:underline">
+          <Link href={`/register?redirect=${encodeURIComponent(redirect)}`} className="text-white hover:underline">
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>

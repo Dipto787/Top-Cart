@@ -4,10 +4,16 @@ import React, { useState } from 'react';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import { FaHeart } from "react-icons/fa";
+import { useSession } from 'next-auth/react';
+import { usePathname, useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 const ProductDetailsClient = ({ product }) => {
+  let { data: session, status } = useSession();
   let [cart, setCart] = useState(1);
   console.log(product)
+  let router = useRouter();
+  let pathName = usePathname();
   // Map your images array to the format react-image-gallery expects
   const images = product.images.map(img => ({
     original: img,
@@ -15,22 +21,31 @@ const ProductDetailsClient = ({ product }) => {
   }));
 
   let handleAddToCart = async (product) => {
+    if (status === 'unauthenticated') {
+      router.push(`/login?redirect=${encodeURIComponent(pathName)}`);
+    }
     let addedCart = {
-      name: product.title,
+      product_name: product.title,
       image: product.images[0],
-      price: product.price * cart,
+      customer_email: session?.user?.email,
+      customer_name: session?.user?.name,
+      product_price: product.price * cart,
       category: product.category,
       quantity: cart,
     };
     try {
       const res = await fetch("http://localhost:3000/api/product", {
-        method: "POST", 
+        method: "POST",
         body: JSON.stringify(addedCart),
       });
 
       const data = await res.json();
+      if (data.result.insertedId || data.result.modifiedCount > 0) {
+        toast.success('Success To Added this Product in Cart')
+      }
       console.log("Saved:", data);
     } catch (error) {
+      toast.error(error.message)
       console.error(error);
     }
   }

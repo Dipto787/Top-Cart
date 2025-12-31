@@ -4,6 +4,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
 import ShopByCategory from "./Components/Category/ShopByCategory";
 import NextAuthProvider from "@/Providers/NextAuthProvider";
+import { Toaster } from "react-hot-toast";
 
 const geist = Geist({
   subsets: ["Playwrite NO"],
@@ -25,11 +26,10 @@ export default function RootLayout({ children }) {
       <body
         className={`  antialiased`}>
         <NextAuthProvider>
-          <Navbar></Navbar>
-
+          <Navbar></Navbar> 
           {children}
-          <Footer></Footer>
-
+          <Toaster /> 
+          <Footer></Footer> 
         </NextAuthProvider>
       </body>
     </html>

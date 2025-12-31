@@ -1,17 +1,21 @@
 'use client';
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import registerUser from "../actions/auth/registerUser";
+import toast from "react-hot-toast";
 
 export default function SignUpPage() {
     const [base64Image, setBase64Image] = useState(null);
     const [preview, setPreview] = useState(null);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    let searchParams = useSearchParams();
 
+    const redirect = searchParams.get("redirect") || "/";
+    console.log(searchParams.get("redirect"))
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -62,16 +66,17 @@ export default function SignUpPage() {
                 // Auto login after registration
                 const loginRes = await signIn("credentials", { email, password, redirect: false });
                 if (loginRes.ok) {
-                    router.push("/"); // redirect to homepage
+                    toast.success('success to registered')
+                     router.push(redirect);// redirect to homepage
                 } else {
-                    alert("Registered successfully, but login failed. Please login manually.");
+                    toast.error("Registered successfully, but login failed. Please login manually.");
                 }
             } else {
-                alert(registerRes.message || "Registration failed");
+                toast.error(registerRes.message || "Registration failed");
             }
         } catch (err) {
             console.error(err);
-            alert("Something went wrong during registration.");
+            toast.error("Something went wrong during registration.");
         }
 
         setLoading(false);

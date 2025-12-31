@@ -1,5 +1,4 @@
 'use client';
-
 import Image from "next/image";
 import Link from "next/link";
 import { IoIosSearch } from "react-icons/io";
@@ -12,7 +11,7 @@ import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   let { data: session, status } = useSession();
-  console.log(session)
+  console.log(session, status)
   const pathname = usePathname();
   const disableNav = pathname === "/login" || pathname === "/register";
   let [categories, setCategories] = useState(null);
@@ -76,34 +75,50 @@ const Navbar = () => {
 
               {/* User Dropdown */}
               <div className="dropdown dropdown-end">
-                <Link href={'/login'}
-                  className="
+
+
+                {
+                  status === 'loading' ? <div className="avatar">
+                    <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring-2 ring-offset-2">
+                      <img src=" " />
+                    </div>
+                  </div> : status === 'authenticated' ?
+
+                    <div>
+                      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                          <img src={session?.user?.image}></img>
+                        </div>
+                      </div>
+                      <ul
+                        tabIndex="-1"
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        <li>
+                          <a className="justify-between">
+                            Profile
+                            <span className="badge">New</span>
+                          </a>
+                        </li>
+                        <li><a>Settings</a></li>
+                        <li><a>Logout</a></li>
+                      </ul>
+                    </div>
+                    :
+                    <div>
+                      <Link href={'/login'}
+                        className="
     px-5 py-3 rounded-md
     text-white text-sm font-medium
     bg-blue-600
     hover:bg-blue-500
     transition-colors duration-200
   "
-                >
-                  Login
-                </Link>
+                      >
+                        Login
+                      </Link>
+                    </div>
+                }
 
-                {/* <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-9 rounded-full ring ring-[#ff9400] ring-offset-2 ring-offset-black">
-                  <img
-                    alt="User Avatar"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  />
-                </div>
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
-              >
-                <li><a>Profile</a></li>
-                <li><a>Settings</a></li>
-                <li><a className="text-red-500">Logout</a></li>
-              </ul> */}
               </div>
 
             </div>
@@ -122,7 +137,7 @@ const Navbar = () => {
               </button>
             </div>
           </div>
-          
+
 
         </div>
         <ShopByCategory categories={categories}></ShopByCategory>
@@ -130,8 +145,6 @@ const Navbar = () => {
     </div>
   );
 };
-
 export default Navbar;
 
 
- 
