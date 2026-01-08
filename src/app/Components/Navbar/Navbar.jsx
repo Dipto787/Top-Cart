@@ -8,10 +8,13 @@ import ShopByCategory from "../Category/ShopByCategory";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
+import useCart from "@/app/lib/hooks/useCart";
 
 const Navbar = () => {
   let { data: session, status } = useSession();
-  console.log(session, status)
+  // console.log(session, status)
+  let { cart } = useCart();
+  console.log(cart)
   const pathname = usePathname();
   const disableNav = pathname === "/login" || pathname === "/register";
   let [categories, setCategories] = useState(null);
@@ -68,7 +71,7 @@ const Navbar = () => {
               <div className="flex flex-col items-center cursor-pointer group relative">
                 <GiShoppingBag className="text-white text-2xl group-hover:text-[#ff9400]" />
                 <span className="absolute -top-1 -right-2 bg-[#ff9400] text-white text-xs font-bold rounded-full px-2">
-                  0
+                  {cart.length}
                 </span>
                 <span className="text-xs font-semibold text-white">CART</span>
               </div>

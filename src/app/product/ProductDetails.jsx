@@ -7,10 +7,13 @@ import { FaHeart } from "react-icons/fa";
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import useCart from '../lib/hooks/useCart';
+import Link from 'next/link';
 
 const ProductDetailsClient = ({ product }) => {
   let { data: session, status } = useSession();
   let [cart, setCart] = useState(1);
+  const { cart: fdsfd, loading } = useCart();
   console.log(product)
   let router = useRouter();
   let pathName = usePathname();
@@ -22,7 +25,7 @@ const ProductDetailsClient = ({ product }) => {
 
   let handleAddToCart = async (product) => {
     if (status === 'unauthenticated') {
-      router.push(`/login?redirect=${encodeURIComponent(pathName)}`);
+      return router.push(`/login?redirect=${encodeURIComponent(pathName)}`);
     }
     let addedCart = {
       product_name: product.title,
@@ -41,6 +44,7 @@ const ProductDetailsClient = ({ product }) => {
 
       const data = await res.json();
       if (data.result.insertedId || data.result.modifiedCount > 0) {
+        window.location.reload(); 
         toast.success('Success To Added this Product in Cart')
       }
       console.log("Saved:", data);
@@ -72,9 +76,9 @@ const ProductDetailsClient = ({ product }) => {
           <button onClick={() => setCart(cart + 1)} className='bg-gray-300 cursor-pointer px-3'>+</button>
         </div>
         <div className="mt-4 flex gap-2">
-          <button onClick={() => handleAddToCart(product)} className="bg-black cursor-pointer rounded-full text-white px-6 py-2  hover:bg-gray-800">
+          <Link href={''}> <button onClick={() => handleAddToCart(product)} className="bg-black cursor-pointer rounded-full text-white px-6 py-2  hover:bg-gray-800">
             Add To Cart
-          </button>
+          </button></Link>
           <button className="bg-gray-400 cursor-pointer  text-white px-3  py-2 rounded-full hover:bg-gray-800">
             <FaHeart></FaHeart>
           </button>
@@ -85,3 +89,8 @@ const ProductDetailsClient = ({ product }) => {
 };
 
 export default ProductDetailsClient;
+
+
+
+
+// in this next.js latest app w
